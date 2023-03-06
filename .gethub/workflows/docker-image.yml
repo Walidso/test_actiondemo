@@ -21,15 +21,6 @@ jobs:
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      -
-#        name: Compose build
- #       run: docker compose build
-      -
-  #      name: Compose push
-   #     run: docker compose push
-
-
-
 
       -
         name: Build and push
