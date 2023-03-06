@@ -22,40 +22,20 @@ jobs:
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       -
-        name: Compose build
-        run: docker compose build
+#        name: Compose build
+ #       run: docker compose build
       -
-        name: Compose push
-        run: docker compose push
+  #      name: Compose push
+   #     run: docker compose push
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      # checkout the repo
-      - name: 'Checkout GitHub Action'
-        uses: actions/checkout@master
 
-      - name: 'Login via Azure CLI'
-        uses: azure/login@v1
+
+
+      -
+        name: Build and push
+        uses: docker/build-push-action@v4
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: 'Deploy to Azure'
-        uses: Azure/aci-deploy@v1
-        with:
-          resource-group: flasktest
-          dns-name-label: flaskactiondemo
-          image: docker.io/walidso/actionsdemo
-          name: flask-actionsdemo
-          location: 'north europe'
-
-
-#      -
-#        name: Build and push
-#        uses: docker/build-push-action@v4
-#        with:
-#          context: .
-#          file: ./Dockerfile
-#          push: true
-#          tags: ${{ secrets.DOCKERHUB_USERNAME }}/actionsdemo:latest
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/actionsdemo:latest
